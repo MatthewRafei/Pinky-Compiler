@@ -14,7 +14,7 @@ TOK_SLASH      = 'TOK_SLASH'      #  /
 TOK_CARET      = 'TOK_CARET'      #  ^
 TOK_MOD        = 'TOK_MOD'        #  %
 TOK_COLON      = 'TOK_COLON'      #  :
-TOK_SEMICOLON  = 'TOK_SEMICOLON'  #  ;
+TOK_SEMICOLON  = 'TOK_SEMICOLON'  #  ;or
 TOK_QUESTION   = 'TOK_QUESTION'   #  ?
 TOK_NOT        = 'TOK_NOT'        #  ~
 TOK_GT         = 'TOK_GT'         #  >
@@ -51,9 +51,11 @@ TOK_PRINTLN    = 'TOK_PRINTLN'
 TOK_RET        = 'TOK_RET'
 
 class Token:
-    def __init__(self, token_type, lexeme):
+    def __init__(self, token_type, lexeme, line, column):
         self.token_type = token_type
         self.lexeme = lexeme
+        self.line = line
+        self.column = column
 
     def __repr__(self):
-        return f'({self.token_type}, {self.lexeme!r})'
+        return f'(Token_Type: {self.token_type:<10}  \tLexeme: {self.lexeme!r} \tline: {self.line} \tcolumn: {self.column:<5})'
