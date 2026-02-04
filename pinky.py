@@ -8,7 +8,7 @@ if __name__ == '__main__':
         raise SystemExit('Usage: python3 pinky.py <filename>')
     filename = sys.argv[1]
     print("FileName: " + str(filename))
-    
+
     with open(filename) as file:
         source = file.read()
 

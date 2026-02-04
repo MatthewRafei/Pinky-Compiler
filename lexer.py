@@ -20,7 +20,7 @@ class Lexer:
     def lookahead(self, n=1):
         if self.current >= len(self.source):
             return "\0"
-        return self.source[self,current + n]
+        return self.source[self.current + n]
 
     def match(self, expected):
         if self.current >= len(self.source):
@@ -35,7 +35,7 @@ class Lexer:
                                  self.source[self.start:self.current],
                                  self.line,
                                  self.column))
-
+    
     def tokenize(self):
         while self.current < len(self.source):
             self.start = self.current
@@ -94,15 +94,17 @@ class Lexer:
                         self.column += 1
                     else: self.add_token(TOK_COLON)
                 # Digits
-                # case isdigit:
-                #     isFloat = False
-                #     while (self.peek() != isdigit or self.peek() != "."):
-                #         if(self.peek() == "."): isFloat = True
-                #         self.advance()
-                #     if isFloat: self.add_token(TOK_FLOAT)
-                #     else: self.add_token(TOK_INTEGER)
-                            
-                    
+                case isdigit:
+                    while self.peek().isdigit():
+                        self.advance()
+                    if self.peek() == "." and self.lookahead().isdigit():
+                        self.advance()
+                        while self.peek().isdigit():
+                            self.advance()
+                        self.add_token(TOK_FLOAT)
+                    else:
+                        self.add_token(TOK_INTEGER)
+                
             self.column += 1
             
         return self.tokens
